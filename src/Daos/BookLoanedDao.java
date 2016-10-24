@@ -38,7 +38,7 @@ public class BookLoanedDao extends Dao implements BookLoanedDaoInterface {
         try {
             con = getConnection();
 
-            String query = "Select * from bookLoaned where bookID = ?";
+            String query = "Select * from bookloaned where bookID = ?";
             ps = con.prepareStatement(query);
             ps.setInt(1, num);
             rs = ps.executeQuery();
@@ -53,7 +53,7 @@ public class BookLoanedDao extends Dao implements BookLoanedDaoInterface {
                 bksLoaned.add(bl);
             }
         } catch (SQLException e) {
-            System.out.println("Exception occured in the selectCustomersByName() method: " + e.getMessage());
+            System.out.println("Exception occured in the getAllBooksOnLoan() method: " + e.getMessage());
         } finally {
             try {
                 if (rs != null) {
