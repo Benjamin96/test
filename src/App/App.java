@@ -88,28 +88,26 @@ public class App {
                     System.out.println("What Do you want to do display all titles, whats on loan, borrow a copy, return, logout");
                     String displayAns = input.nextLine().toLowerCase();
                     
-                    if(displayAns.equals("display"))
-                    {
-                        switchvar = 1;
+                    switch (displayAns) {
+                        case "display":
+                            switchvar = 1;
+                            break;
+                        case "on loan":
+                            switchvar = 2;
+                            break;
+                        case "loan":
+                            switchvar = 3;
+                            break;
+                        case "return":
+                            switchvar = 4;
+                            break;
+                        case "logout":
+                            switchvar = 5;
+                            break;
+                        default:
+                            switchvar = 6;
+                            break;
                     }
-                    else if(displayAns.equals("on loan"))
-                    {
-                        switchvar = 2;
-                    }
-                    else if(displayAns.equals("loan"))
-                    {
-                        switchvar = 3;
-                    }
-                    else if(displayAns.equals("return"))
-                    {
-                        switchvar = 4;
-                    }
-                    else if(displayAns.equals("logout"))
-                    {
-                        switchvar = 5;
-                    }
-                    else
-                        switchvar = 6;
                     
                     switch (switchvar)
                     {
@@ -126,7 +124,7 @@ public class App {
                         for(int i = 0; i < books.size(); i++)
                         {
                             BookStock bookloan = bDao.getAllBooks().get(i);
-                            lDao.getAllBooksOnLoan(bookloan).toString();
+                            System.out.println(lDao.getAllBooksOnLoan(bookloan).toString());
                         }
                         break;
                         
