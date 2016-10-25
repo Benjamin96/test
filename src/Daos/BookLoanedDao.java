@@ -44,10 +44,11 @@ public class BookLoanedDao extends Dao implements BookLoanedDaoInterface {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                String title = rs.getString("bookName");
+                String title = book.getBookName();
                 String uname = rs.getString("userID");
                 bk = bksDao.getABookByName(title);
-                usr = uDao.getUserbyName(uname);
+                int uid = Integer.parseInt(uname);
+                usr = uDao.getUSerbyId(uid);
                 
                 BookLoaned bl = new BookLoaned(rs.getInt("loanID"), bk, usr);
                 bksLoaned.add(bl);
@@ -80,14 +81,14 @@ public class BookLoanedDao extends Dao implements BookLoanedDaoInterface {
         
         try {
             con = getConnection();
-            String query = "Insert into bookLoaned (bookID, userID) values ?, ?";
+            String query = "Insert into bookloaned (bookID, userID) values (?, ?)";
             ps = con.prepareStatement(query);
-            ps.setInt(2, book.getBookID());
-            ps.setInt(3, userID);
+            ps.setInt(1, book.getBookID());
+            ps.setInt(2, userID);
             rowsAffected = ps.executeUpdate();
            
         } catch (SQLException e) {
-            System.out.println("Exception occured in the selectCustomersByName() method: " + e.getMessage());
+            System.out.println("Exception occured in the BorrowABook method: " + e.getMessage());
         } finally {
             try {
                 if (ps != null) {

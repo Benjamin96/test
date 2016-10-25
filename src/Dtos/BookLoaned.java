@@ -85,7 +85,7 @@ public class BookLoaned implements Comparable<BookLoaned>{
 
     @Override
     public String toString() {
-        return "BookLoaned{" + "loanID=" + loanID + ", book=" + book + ", user=" + user + '}';
+        return "\n" + "loanID= " + loanID + " book= " + book + " user= " + user;
     }
 
     @Override

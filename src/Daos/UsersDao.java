@@ -35,7 +35,7 @@ public class UsersDao extends Dao implements UsersDaoInterface{
             
             while(rs.next())
             {
-                Users u = new Users(rs.getString("userName"), rs.getString("password"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("address"), rs.getString("email"),  rs.getInt("booksLoaned"), rs.getInt("admin"), rs.getInt("loggedIn"));
+                Users u = new Users(rs.getString("userName"), rs.getString("password"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("address"), rs.getString("email"),  rs.getInt("booksLoaned"), rs.getInt("admin"));
                 users.add(u);
             }
         }catch (SQLException e) {
@@ -75,7 +75,7 @@ public class UsersDao extends Dao implements UsersDaoInterface{
             
             while(rs.next())
             {
-                                Users u = new Users(rs.getString("userName"), rs.getString("password"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("address"), rs.getString("email"),  rs.getInt("booksLoaned"), rs.getInt("admin"), rs.getInt("loggedIn"));
+                Users u = new Users(rs.getString("userName"), rs.getString("password"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("address"), rs.getString("email"),  rs.getInt("booksLoaned"), rs.getInt("admin"));
                 users.add(u);
             }
         }catch (SQLException e) {
@@ -115,7 +115,7 @@ public class UsersDao extends Dao implements UsersDaoInterface{
             
             while(rs.next())
             {
-                Users u = new Users(rs.getString("userName"), rs.getString("password"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("address"), rs.getString("email"),  rs.getInt("booksLoaned"), rs.getInt("admin"), rs.getInt("loggedIn"));
+                Users u = new Users(rs.getString("userName"), rs.getString("password"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("address"), rs.getString("email"),  rs.getInt("booksLoaned"), rs.getInt("admin"));
                 users.add(u);
             }
         }catch (SQLException e) {
@@ -207,7 +207,7 @@ public class UsersDao extends Dao implements UsersDaoInterface{
             
             while(rs.next())
             {
-            u = new Users(rs.getString("userName"), rs.getString("password"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("address"), rs.getString("email"),  rs.getInt("booksLoaned"), rs.getInt("admin"), rs.getInt("loggedIn"));
+            u = new Users(rs.getString("userName"), rs.getString("password"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("address"), rs.getString("email"),  rs.getInt("booksLoaned"), rs.getInt("admin"));
             }
  
         }catch (SQLException e) {
@@ -247,7 +247,45 @@ public class UsersDao extends Dao implements UsersDaoInterface{
             
             while(rs.next())
             {
-                u = new Users(rs.getString("userName"), rs.getString("password"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("address"), rs.getString("email"),  rs.getInt("booksLoaned"), rs.getInt("admin"), rs.getInt("loggedIn"));
+                u = new Users(rs.getString("userName"), rs.getString("password"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("address"), rs.getString("email"),  rs.getInt("booksLoaned"), rs.getInt("admin"));
+            }
+        }catch (SQLException e) {
+            System.out.println("Exception occured in the getUserbyName() method: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.out.println("Exception occured in the finally section of the getUserbyName() method: " + e.getMessage());
+            }
+        }
+        
+        return u;
+    }
+    
+    public Users getUSerbyId(int id) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Users u = null;
+        try{
+            con = getConnection();
+
+            String query = "Select * from users Where userid = ?";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, id);
+            rs = ps.executeQuery(); 
+            
+            while(rs.next())
+            {
+                u = new Users(rs.getString("userName"), rs.getString("password"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("address"), rs.getString("email"),  rs.getInt("booksLoaned"), rs.getInt("admin"));
             }
         }catch (SQLException e) {
             System.out.println("Exception occured in the getUserbyName() method: " + e.getMessage());
@@ -287,7 +325,7 @@ public class UsersDao extends Dao implements UsersDaoInterface{
             
             while(rs.next())
             {
-                Users u = new Users(rs.getString("userName"), rs.getString("password"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("address"), rs.getString("email"),  rs.getInt("booksLoaned"), rs.getInt("admin"), rs.getInt("loggedIn"));
+                Users u = new Users(rs.getString("userName"), rs.getString("password"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("address"), rs.getString("email"),  rs.getInt("booksLoaned"), rs.getInt("admin"));
                 users.add(u);
             }
         }catch (SQLException e) {

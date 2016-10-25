@@ -223,7 +223,7 @@ public class BookStockDao extends Dao implements BookStockDaoInterface {
         try{
             con = getConnection();
 
-            String query = "UPDATE bookstock set copies - 1 where bookID = ?";
+            String query = "UPDATE bookstock set copies = copies - 1 where bookID = ?";
             ps = con.prepareStatement(query);
             ps.setInt(1, bookID);
             rowsAffected = ps.executeUpdate(); 

@@ -22,6 +22,8 @@ public interface UsersDaoInterface {
     //logging in a user
     public Users getUserbyName(String name);
     //get user by name
+    public Users getUSerbyId(int id);
+    //get user by id
     public ArrayList<Users>getUserContaingName(String name);
     //get user by name wildcard
     public boolean RemoveUser(int userID);
