@@ -99,7 +99,7 @@ public class BookStock implements Comparable<BookStock>{
 
     @Override
     public String toString() {
-        return "\n" + "bookID= " + bookID + " bookName= " + bookName + " author= " + author + " publisher= " + publisher + ", copies=" + copies;
+        return "bookID= " + bookID + " bookName= " + bookName + " author= " + author + " publisher= " + publisher + ", copies=" + copies + "\n";
     }
 
     @Override

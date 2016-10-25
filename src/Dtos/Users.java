@@ -144,7 +144,7 @@ public class Users implements Comparable<Users> {
 
     @Override
     public String toString() {
-        return "\n" + "user_id= " + user_id + " username= " + username + " password= " + password + " Fname= " + Fname + " Lname= " + Lname + " Address= " + Address + " email= " + email + " booksLoaned= " + booksLoaned + " Admin= " + Admin ;
+        return "user_id= " + user_id + " username= " + username + " password= " + password + " Fname= " + Fname + " Lname= " + Lname + " Address= " + Address + " email= " + email + " booksLoaned= " + booksLoaned + " Admin= " + Admin;
     }
 
     @Override
