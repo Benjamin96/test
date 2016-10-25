@@ -85,7 +85,7 @@ public class App {
                     //we are now logged in
                     System.out.println("You have succesfully logged in");
                     
-                    System.out.println("What Do you want to do display all titles, whats on loan, borrow a copy, return, logout");
+                    System.out.println("What Do you want to do display all titles, whats on loan, borrow a copy, return, logout eg(display, on loan, borrow, return, logout)");
                     String displayAns = input.nextLine().toLowerCase();
                     
                     switch (displayAns) {
@@ -95,7 +95,7 @@ public class App {
                         case "on loan":
                             switchvar = 2;
                             break;
-                        case "loan":
+                        case "borrow":
                             switchvar = 3;
                             break;
                         case "return":
@@ -141,10 +141,10 @@ public class App {
                         break;
                         
                         case 4://figure this out
-                            /*
+                          /*
                         System.out.println("The following is the books you have loaned");
                         
-                        lDao.getAllBooksOnLoan(book);
+                        lDao.getAllBooksOnLoan();
                         */
                         break;
                         
