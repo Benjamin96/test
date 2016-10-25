@@ -26,12 +26,13 @@ public class BookLoaned implements Comparable<BookLoaned>{
         this.book = book;
         this.user = user;
     }
-    
+    /*
     public BookLoaned(int loanID, int bookID, int userID) {
         this.loanID = loanID;
         this.book = book;
         this.user = user;
     }
+    */
 
     public int getLoanID() {
         return loanID;
