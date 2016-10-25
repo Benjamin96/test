@@ -13,9 +13,9 @@ public class App {
     public static void main(String[] args) 
     {
         int switchvar = 0;
-        UsersDao uDao = new UsersDao("libaryca");
-        BookStockDao bDao = new BookStockDao("libaryca");
-        BookLoanedDao lDao = new BookLoanedDao("libaryca");
+        UsersDao uDao = new UsersDao("libraryca");
+        BookStockDao bDao = new BookStockDao("libraryca");
+        BookLoanedDao lDao = new BookLoanedDao("libraryca");
         ArrayList<Users> users = uDao.getAllUsers();
         ArrayList<BookStock> books = bDao.getAllBooks();
 
@@ -131,12 +131,13 @@ public class App {
                         case 3:
                         System.out.println("Which book do you wish to loan eg(bookid please)");
                         int id = input.nextInt();
-                        for(int i = 0; i < 999; i++)
-                        {
+                        
                              bDao.takeOutABook(id);
                              BookStock bookEntry = bDao.getABookById(id);
                              lDao.BorrowABook(bookEntry, userid);
-                        }
+                             
+                             input.nextLine();
+                        
                         break;
                         
                         case 4://figure this out
