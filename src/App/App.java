@@ -140,12 +140,27 @@ public class App {
                         
                         break;
                         
-                        case 4://figure this out
-                          /*
+                        case 4:
                         System.out.println("The following is the books you have loaned");
                         
-                        lDao.getAllBooksOnLoan();
-                        */
+                        ArrayList<BookLoaned> loanedBooks = lDao.getAllBooksOnLoanByUser(userid);
+                        
+                        for(int i = 0; i < loanedBooks.size(); i++)
+                        {
+                             System.out.println(loanedBooks.get(i).getBook().toString());
+                        }
+                        
+                        System.out.println("Please enter the id of the book you wish to return");
+                        int bookid = input.nextInt();
+                        
+                       String ChosenBook = bDao.getABookById(bookid).getBookName();
+                        
+                        boolean returning = bDao.ReturnABook(ChosenBook);
+                        if(returning == true)
+                        {    
+                        bDao.IncreasingCopiesBook(bookid);
+                        lDao.RemovefromTable(bDao.getABookByName(ChosenBook), userid);
+                        }
                         break;
                         
                         case 5:
