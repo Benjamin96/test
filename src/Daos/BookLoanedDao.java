@@ -108,4 +108,89 @@ public class BookLoanedDao extends Dao implements BookLoanedDaoInterface {
             return false;
         }
     }
+    
+    @Override
+    public ArrayList<BookLoaned>getAllBooksOnLoanByUser(int id){
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ArrayList<BookLoaned> loanedBook = new ArrayList();
+        
+        BookStock bk = null;
+        Users usr = null;
+        BookStockDao bksDao = new BookStockDao("libraryca");
+        UsersDao uDao = new UsersDao("libraryca");
+        try
+        {
+            con = getConnection();
+            
+            String query = "Select * from bookloaned where userID = ? ";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while(rs.next())
+            {
+               String queryBookId = rs.getString("bookID");
+               int bkid = Integer.parseInt(queryBookId);
+               bk = bksDao.getABookById(bkid);
+               
+               usr = uDao.getUSerbyId(id);
+               
+               BookLoaned book = new BookLoaned(rs.getInt("loanID"), bk, usr);
+               loanedBook.add(book);
+            }
+        }catch (SQLException e) {
+            System.out.println("Exception occured in the getABookByName() method: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.out.println("Exception occured in the finally section of the getAllBooksOnLoanByUser() method: " + e.getMessage());
+            }
+    }
+        return loanedBook;
+    }
+    
+    @Override
+    public boolean RemovefromTable(BookStock book, int userID) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        int rowsAffected = 0;
+
+        try {
+            con = getConnection();
+            String query = "DELETE FROM bookLoaned WHERE bookId = ? AND userId = ?";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, book.getBookID());
+            ps.setInt(2, userID);
+            rowsAffected = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Exception occured in the ReturnABook method: " + e.getMessage());
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.out.println("Exception occured in the finally section of the BorrowABook() method: " + e.getMessage());
+            }
+        }
+        if (rowsAffected > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

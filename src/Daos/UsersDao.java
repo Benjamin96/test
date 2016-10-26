@@ -148,7 +148,7 @@ public class UsersDao extends Dao implements UsersDaoInterface{
         try{
             con = getConnection();
 
-            String query = "Insert into users values(?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "Insert into users (username, password, firstName, lastName, address, email, booksLoaned, admin) values(?, ?, ?, ?, ?, ?, ?, ?)";
             ps = con.prepareStatement(query);
             ps.setString(1, u.getUsername());
             ps.setString(2, u.getPassword());

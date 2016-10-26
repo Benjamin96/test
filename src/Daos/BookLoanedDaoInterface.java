@@ -26,4 +26,16 @@ public interface BookLoanedDaoInterface {
      * @return
      */
     
+    public ArrayList<BookLoaned>getAllBooksOnLoanByUser(int userID);
+    /**
+     * @param userID
+     * @return
+     */
+    
+    public boolean RemovefromTable(BookStock book, int userID);
+    /**
+     *@param book
+     * @param userID
+     * @return 
+     */      
 }
