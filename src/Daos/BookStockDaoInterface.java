@@ -30,11 +30,11 @@ public interface BookStockDaoInterface {
     //should remove a book from libary (record compeltly removed)(admin only)
     public boolean AddingABook(BookStock b);
     //Adding a book to database
-    public boolean EditingABook(int bookID);
+    public boolean EditingABook(String bookName, int bookID);
     //admin should be able to edit a record(admin only)
-    public boolean IncreasingCopiesBook(int bookID);
+    public boolean IncreasingCopiesBook(int bookID, int copiesInc);
     //admin increses the book copies(admin only)
-    public boolean DescresingCopiesBook(int bookId);
+    public boolean DescresingCopiesBook(int bookId, int copiesDex);
     //admin decreses number of book copies(admin only)
     
 }

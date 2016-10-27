@@ -138,6 +138,86 @@ public class UsersDao extends Dao implements UsersDaoInterface{
         
         return users;
     }
+    
+    @Override
+    public Users getAdminByName(String adminName)
+    {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Users u = null;
+        try{
+            con = getConnection();
+
+            String query = "Select * from users Where username = ?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, adminName);
+            rs = ps.executeQuery(); 
+            
+            while(rs.next())
+            {
+                u = new Users(rs.getString("userName"), rs.getString("password"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("Address"), rs.getString("email"), rs.getInt("booksLoaned"), rs.getInt("Admin"));
+            }
+        }catch (SQLException e) {
+            System.out.println("Exception occured in the getAdminbyName() method: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.out.println("Exception occured in the finally section of the getAdminbyName() method: " + e.getMessage());
+            }
+        }
+        
+        return u;
+    }  
+    
+    @Override
+    public Users getAdminByID(int adminid)
+    {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Users u = null;
+        try{
+            con = getConnection();
+
+            String query = "Select * from users Where userID = ?";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, adminid);
+            rs = ps.executeQuery(); 
+            
+            while(rs.next())
+            {
+                u = new Users(rs.getString("userName"), rs.getString("password"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("Address"), rs.getString("email"), rs.getInt("booksLoaned"), rs.getInt("Admin"));
+            }
+        }catch (SQLException e) {
+            System.out.println("Exception occured in the getAdminbyName() method: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.out.println("Exception occured in the finally section of the getAdminbyName() method: " + e.getMessage());
+            }
+        }
+        
+        return u;
+    }
 
     @Override
     public boolean RegistorUser(Users u) {

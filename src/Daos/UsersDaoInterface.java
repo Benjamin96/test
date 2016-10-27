@@ -16,6 +16,10 @@ public interface UsersDaoInterface {
      //return all Standard users
     public ArrayList<Users>getAllAdminUsers();
       //return all admin users
+    public Users getAdminByName(String adminName);
+    //get admin confirmation;
+    public Users getAdminByID(int adminid);
+    //get admin confirmation
     public boolean RegistorUser(Users u);
     //registering a user
     public Users LogingInUser(String name, String password);

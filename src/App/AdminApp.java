@@ -5,11 +5,12 @@ import java.util.*;
 import Daos.*;
 import Dtos.*;
 
-/**
+/** test
  *
+ * 
  * @author Ben,Chris,Aleks
- */
-public class App {
+ */ 
+public class AdminApp {
     public static void main(String[] args) 
     {
         int switchvar = 0;
@@ -18,9 +19,10 @@ public class App {
         BookLoanedDao lDao = new BookLoanedDao("libraryca");
         ArrayList<Users> users = uDao.getAllUsers();
         ArrayList<BookStock> books = bDao.getAllBooks();
-
+        
+        
         Scanner input = new Scanner(System.in);
-
+      
         System.out.println("Do you wish to register or login");
         String choice = input.nextLine();
         
@@ -78,6 +80,7 @@ public class App {
                 
                 userlog.setUsername(name);
                 userlog.setPassword(password);
+                
                 
                 if(uDao.LogingInUser(name, password).equals(userlog) && uDao.getAdminByName(name).getAdmin() == 1)
                 {
@@ -340,14 +343,26 @@ public class App {
                             
                     }
                 }
+                    else if(!(uDao.LogingInUser(name, password).equals(userlog)))
+                {
+                    System.out.println("The details you have entered is incorrect try again");
+                }
+            
                 
+                //If the user doesn't type in the right information
+                else if(!(uDao.LogingInUser(name, password).equals(userlog)))
+                {
+                    System.out.println("The details you have entered is incorrect try again");
+                }
+                
+                //Checks to see if the user is an admin.
                 else if(uDao.LogingInUser(name, password).equals(userlog))
                 {
                     int userid = uDao.getUserbyName(name).getUser_id();
                     //we are now logged in
                     System.out.println("You have succesfully logged in");
                     
-                    System.out.println("What Do you want to do display all titles, whats on loan, borrow a copy, return, logout eg(display, on loan, borrow, return, logout)");
+                    System.out.println("What Do you want to do display all titles, whats on loan, borrow a copy, return, logout");
                     String displayAns = input.nextLine().toLowerCase();
                     
                     switch (displayAns) {
@@ -357,7 +372,7 @@ public class App {
                         case "on loan":
                             switchvar = 2;
                             break;
-                        case "borrow":
+                        case "loan":
                             switchvar = 3;
                             break;
                         case "return":
@@ -393,44 +408,20 @@ public class App {
                         case 3:
                         System.out.println("Which book do you wish to loan eg(bookid please)");
                         int id = input.nextInt();
-                        
+                        for(int i = 0; i < 999; i++)
+                        {
                              bDao.takeOutABook(id);
                              BookStock bookEntry = bDao.getABookById(id);
                              lDao.BorrowABook(bookEntry, userid);
-                             
-                             input.nextLine();
-                        
+                        }
                         break;
                         
-                        case 4:
+                        case 4://figure this out
+                            /*
                         System.out.println("The following is the books you have loaned");
                         
-                        ArrayList<BookLoaned> loanedBooks = lDao.getAllBooksOnLoanByUser(userid);
-                        if(loanedBooks.size() > 0){
-                        
-                        for(int i = 0; i < loanedBooks.size(); i++)
-                        {
-                             System.out.println(loanedBooks.get(i).getBook().toString());
-                        }
-                        
-                        System.out.println("Please enter the id of the book you wish to return");
-                        int bookid = input.nextInt();
-                        
-                       String ChosenBook = bDao.getABookById(bookid).getBookName();
-                        
-                        boolean returning = bDao.ReturnABook(ChosenBook);
-                        input.nextLine();
-                        
-                            if(returning == true)
-                            {    
-                                System.out.println("Book has been Returned");
-                                lDao.RemovefromTable(bDao.getABookByName(ChosenBook), userid);
-                            }
-                        }
-                        else if(loanedBooks.size() > 0 || loanedBooks.size() == 0)
-                        {
-                            System.out.println("Sorry " + uDao.getUSerbyId(userid).getUsername() + " you have no books");
-                        }
+                        lDao.getAllBooksOnLoan(book);
+                        */
                         break;
                         
                         case 5:
@@ -443,15 +434,17 @@ public class App {
                             }
                     }
                 }
-                else if(!(uDao.LogingInUser(name, password).equals(userlog)))
-                {
-                    System.out.println("The details you have entered is incorrect try again");
+                    
                 }
             }
-            
         }
-                 
+           
+                      
          }
-    }
+        
+        //END OF THE WHILE LOOP
+        
+        
     
+
 

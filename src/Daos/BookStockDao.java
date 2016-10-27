@@ -182,14 +182,14 @@ public class BookStockDao extends Dao implements BookStockDaoInterface {
         try{
             con = getConnection();
 
-            String query = "UPDATE bookstock set copies + 1 WHERE bookName = ?";
+            String query = "UPDATE bookstock SET copies = copies + 1 WHERE bookName = ?";
             ps = con.prepareStatement(query);
             ps.setString(1, bookName);
          
             rowsAffected = ps.executeUpdate(); 
             
         }catch (SQLException e) {
-            System.out.println("Exception occured in the EditingABook() method: " + e.getMessage());
+            System.out.println("Exception occured in the ReturnABook() method: " + e.getMessage());
             
         } finally {
             try {
@@ -301,7 +301,7 @@ public class BookStockDao extends Dao implements BookStockDaoInterface {
         Admin controlled methods
     */
     @Override
-    public boolean EditingABook(int bookID) {
+    public boolean EditingABook(String bookName, int ID) {
         Connection con = null;
         PreparedStatement ps = null;
         int rowsAffected = 0;
@@ -309,9 +309,10 @@ public class BookStockDao extends Dao implements BookStockDaoInterface {
         try{
             con = getConnection();
 
-            String query = "UPDATE bookstock set bookID WHERE bookID = ?";
+            String query = "UPDATE bookstock set bookName = ? WHERE bookID = ?";
             ps = con.prepareStatement(query);
-            ps.setInt(1, bookID);
+            ps.setString(1, bookName);
+            ps.setInt(2, ID);
          
             rowsAffected = ps.executeUpdate(); 
             
@@ -341,7 +342,7 @@ public class BookStockDao extends Dao implements BookStockDaoInterface {
     }
 
     @Override
-    public boolean IncreasingCopiesBook(int bookID) {
+    public boolean IncreasingCopiesBook(int bookID, int copiesInc) {
         Connection con = null;
         PreparedStatement ps = null;
         int rowsAffected = 0;
@@ -349,9 +350,10 @@ public class BookStockDao extends Dao implements BookStockDaoInterface {
         try{
             con = getConnection();
 
-            String query = "UPDATE bookstock set copies + 1 where bookID = ?";
+            String query = "UPDATE bookstock set copies = copies + ? where bookID = ?";
             ps = con.prepareStatement(query);
-            ps.setInt(1, bookID);
+            ps.setInt(1, copiesInc);
+            ps.setInt(2, bookID);
             rowsAffected = ps.executeUpdate(); 
             
         }catch (SQLException e) {
@@ -380,7 +382,7 @@ public class BookStockDao extends Dao implements BookStockDaoInterface {
     }
 
     @Override
-    public boolean DescresingCopiesBook(int bookId) {
+    public boolean DescresingCopiesBook(int bookId, int copiesDex) {
         Connection con = null;
         PreparedStatement ps = null;
         int rowsAffected = 0;
@@ -388,9 +390,10 @@ public class BookStockDao extends Dao implements BookStockDaoInterface {
         try{
             con = getConnection();
             //Updates the copies to lower "set copies -1" 
-            String query = "UPDATE bookstock set copies - 1 where bookID = ?";
+            String query = "UPDATE bookstock set copies = copies - ? where bookID = ?";
             ps = con.prepareStatement(query);
-            ps.setInt(1, bookId);
+            ps.setInt(1, copiesDex);
+            ps.setInt(2, bookId);
             rowsAffected = ps.executeUpdate(); 
             
         }catch (SQLException e) {
